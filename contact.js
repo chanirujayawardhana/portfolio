@@ -1,48 +1,59 @@
-<script>
+// contact.js
 (function () {
   const form = document.getElementById("contact_form");
   if (!form) return;
 
-  // show/hide helpers using your existing elements
-  const ok = document.getElementById("success_message");
+  const ok  = document.getElementById("success_message");
   const err = document.getElementById("error_message");
-  function show(el){ el && el.classList.add("show"); el && el.classList.remove("hide"); }
-  function hide(el){ el && el.classList.add("hide"); el && el.classList.remove("show"); }
+
+  function show(el, msg) {
+    if (!el) return;
+    if (msg) el.textContent = msg;
+    el.style.display = "block";
+  }
+  function hide(el) { if (el) el.style.display = "none"; }
+
   hide(ok); hide(err);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    hide(ok); hide(err);
 
-    // basic client validation
+    // honeypot
+    const hp = form.company?.value?.trim();
+    if (hp) { show(ok, "Thanks!"); form.reset(); return; }
+
+    // simple check
     const name = form.name.value.trim();
     const email = form.email.value.trim();
-    const phone = form.phone.value.trim();
     const message = form.message.value.trim();
-    const hp = form.company?.value.trim(); // honeypot
-
-    if (hp) { // bot
-      hide(err); show(ok); form.reset(); return;
-    }
     if (!name || !email || !message) {
-      hide(ok); show(err); err.textContent = "Please fill in name, email, and message.";
+      show(err, "Please fill in name, email and message.");
       return;
     }
 
-    // build payload incl. reCAPTCHA token (v2 checkbox posts automatically)
-    const data = new FormData(form);
+    const data = {
+      name,
+      email,
+      subject: "Contact form",
+      message
+    };
+
     try {
-      const res = await fetch(form.action, { method: "POST", body: data });
+      const res = await fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
       const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error(json.error || "Failed");
-      hide(err); show(ok);
+      if (!res.ok || !json.ok) throw new Error(json.error || "Failed to send");
+
+      show(ok, "Your message has been sent. I’ll get back to you soon!");
       form.reset();
-      // reset reCAPTCHA checkbox (if present)
       if (window.grecaptcha) grecaptcha.reset();
     } catch (e2) {
-      hide(ok); show(err);
-      err.textContent = "Sorry, there was an error sending your message.";
       console.error(e2);
+      show(err, "Sorry, there was an error sending your message.");
     }
   });
 })();
-</script>
