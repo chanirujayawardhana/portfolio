@@ -75,16 +75,34 @@
         margin-bottom: 30px;
     }
 
-    /* Overlay shouldn't affect height */
+    /* Overlay shouldn't add height */
 .card-image-1{ position: relative; }
 .card-image-1 .d-text{
-  position: absolute; left: 10px; right: 10px; bottom: 10px;
-  z-index: 2; pointer-events: none;
+  position: absolute;
+  left: 10px; right: 10px; bottom: 10px;
+  z-index: 2;
+  pointer-events: none;
 }
+
+/* Slightly bigger, consistent button */
+.btn-main{
+  padding: .7rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* A touch of spacing between columns if needed */
+.sequence > [class*="col-"]{ margin-bottom: .25rem; 
 
 /* Mobile refinements */
 @media (max-width: 575.98px){
-  .btn-main{ padding: .65rem 2rem; font-size: 1rem; }
+
+    .btn-main {
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
 }
 
 
@@ -347,7 +365,7 @@
                3) The first image is the cover; include it in data-gallery if you want it in the popup. -->
 
             <!-- ===== Portfolio Grid ===== -->
-<div class="row g-2 sequence">
+<div class="row g-3 sequence">
 
   <!-- HYPATIA '25 -->
   <div class="col-6 col-md-4 item">
@@ -399,7 +417,7 @@
         <h3>Gamage's Family</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb-1">
+      <div class="portfolio-thumb">
         <img src="Gamage's Family/2-1.jpg" alt="Gamage's Family" loading="lazy">
       </div>
     </div>
@@ -413,7 +431,7 @@
         <h3>Thimali &amp; Chamath</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb-1">
+      <div class="portfolio-thumb">
         <img src="Thimali/5-1.jpg" alt="Thimali &amp; Chamath Cover" loading="lazy">
       </div>
     </div>
@@ -427,19 +445,17 @@
         <h3>Christiana</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb-1">
+      <div class="portfolio-thumb">
         <img src="Chrissy/6-1.jpg" alt="Christiana Cover" loading="lazy">
       </div>
     </div>
   </div>
 
-  <!-- MOBILE-ONLY "See More" row (appears after Christiana) -->
-  <div class="col-12 text-center mt-2 d-block d-md-none">
+  <!-- See More button (visible on mobile & desktop) -->
+  <div class="col-12 text-center mt-3">
     <a href="portfolio.html" class="btn btn-main btn-sm">See More</a>
   </div>
 </div>
-
-
 
         </div>
     </section>
@@ -764,6 +780,7 @@
 
 
 </html>
+
 
 
 
