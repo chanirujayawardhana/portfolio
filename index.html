@@ -75,6 +75,19 @@
         margin-bottom: 30px;
     }
 
+    /* Overlay shouldn't affect height */
+.card-image-1{ position: relative; }
+.card-image-1 .d-text{
+  position: absolute; left: 10px; right: 10px; bottom: 10px;
+  z-index: 2; pointer-events: none;
+}
+
+/* Mobile refinements */
+@media (max-width: 575.98px){
+  .btn-main{ padding: .65rem 2rem; font-size: 1rem; }
+}
+
+
 </style>
 <link href="css/coloring.css" rel="stylesheet" type="text/css" />
 
@@ -386,7 +399,7 @@
         <h3>Gamage's Family</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb">
+      <div class="portfolio-thumb-1">
         <img src="Gamage's Family/2-1.jpg" alt="Gamage's Family" loading="lazy">
       </div>
     </div>
@@ -400,7 +413,7 @@
         <h3>Thimali &amp; Chamath</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb">
+      <div class="portfolio-thumb-1">
         <img src="Thimali/5-1.jpg" alt="Thimali &amp; Chamath Cover" loading="lazy">
       </div>
     </div>
@@ -414,7 +427,7 @@
         <h3>Christiana</h3>
         <h5 class="d-tag">photography</h5>
       </div>
-      <div class="portfolio-thumb">
+      <div class="portfolio-thumb-1">
         <img src="Chrissy/6-1.jpg" alt="Christiana Cover" loading="lazy">
       </div>
     </div>
@@ -751,6 +764,7 @@
 
 
 </html>
+
 
 
 
